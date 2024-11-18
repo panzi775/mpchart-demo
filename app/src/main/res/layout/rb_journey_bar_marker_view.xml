@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clJourneyBarMarker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_200"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="5dp">
+
+
+    <TextView
+        android:id="@+id/tvJourneyDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@color/teal_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="9月17日" />
+
+    <ImageView
+        android:id="@+id/ivJourneyIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/icon_car_s"
+        app:layout_constraintTop_toBottomOf="@id/tvJourneyDate"
+        />
+
+    <TextView
+        android:id="@+id/tvJourneyMileage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_500"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivJourneyIcon"
+        android:text="100" />
+
+
+    <TextView
+        android:id="@+id/tvJourneyMileageUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="公里"
+        android:textColor="@color/purple_500"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvJourneyMileage"
+        app:layout_constraintStart_toEndOf="@+id/tvJourneyMileage"
+        app:layout_constraintTop_toTopOf="@id/tvJourneyMileage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
