@@ -1,8 +1,12 @@
 package com.example.demo.widget
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.util.Log
+import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.demo.R
@@ -17,12 +21,12 @@ class BarMarkerView(
 ) : MarkerView(context, layoutResource) {
 
     // 初始化TextView
-    private val tvDate: TextView = findViewById(R.id.tvJourneyDate)
-    private val tvMileage: TextView = findViewById(R.id.tvJourneyMileage)
+    private val container: ImageView = findViewById(R.id.imageContainer)
+
 
     init {
         // 设置
-        clipToPadding = false
+        clipToPadding = true
 
         clipChildren = false
     }
@@ -31,12 +35,24 @@ class BarMarkerView(
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         if (e != null && e.y > 0) {
             // 设置显示内容，这里 e.y 是值，e.x 是对应的x轴（可以是日期）
-            this.isVisible = true
-            tvDate.text = e.x.toInt().toString()
-            tvMileage.text = e.y.toString()
+            // 根据rb_journey_bar_marker_view生成图片
+            val view =  LayoutInflater.from(context).inflate(R.layout.rb_journey_bar_marker_view, this, false)
+             view.findViewById<TextView>(R.id.tvJourneyMileage).apply {
+                text = "pangao"
+             }
+//            //计算view的大小
+            view.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED))
+
+            view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+
+            Bitmap.createBitmap(200, 100, Bitmap.Config.ARGB_8888).also {
+                view.draw(Canvas(it))
+                container.setImageBitmap(it)
+            }
             super.refreshContent(e, highlight)
+            requestLayout()
         } else {
-            this.isVisible = false
+            this@BarMarkerView.isVisible = false
         }
     }
 
@@ -48,6 +64,7 @@ class BarMarkerView(
     // 重写draw方法，实现自定义绘制
     override fun draw(canvas: Canvas?, posX: Float, posY: Float) {
         if (this.isVisible) {
+            Log.i("pangao", "draw: ")
             super.draw(canvas, posX, 0f)
             val linePaint = Paint().apply {
                 color = context.resources.getColor(R.color.black, null)
