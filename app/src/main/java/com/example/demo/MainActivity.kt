@@ -3,6 +3,7 @@ package com.example.demo
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.example.demo.databinding.MainLayoutBinding
+import com.example.demo.utils.UiUtils
 import com.example.demo.widget.BarMarkerView
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -29,8 +30,9 @@ class MainActivity :FragmentActivity() {
                 barWidth = 0.9f
                 addDataSet(BarDataSet(listOf(BarEntry(1f, 2f), BarEntry(2f, 3f), BarEntry(3f, 4f)), "Data"))
             }
-           // invalidate()
         }
+
+//        binding.fyDownloadProgressBg.translationY = UiUtils.dp2px(this, -30f).toFloat()
 
     }
 
